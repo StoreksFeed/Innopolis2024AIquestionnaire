@@ -2,9 +2,9 @@ from setuptools import setup, find_packages
 
 setup(
     name='Innopolis2024AIquestionnaire',
-    version='0.2.0',
+    version='0.2.2',
     description='A library providing tools for psychological AI evaluation',
-    author='Semyon Glazyrin',
+    author='Semyon Glazyrin, Dmitry Samokhvalov',
     url='https://github.com/StoreksFeed/Innopolis2024AIquestionnaire',
     packages=find_packages(),
     install_requires=[
