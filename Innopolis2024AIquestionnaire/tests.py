@@ -31,3 +31,13 @@ class DESQuestionnaire(TextTest):
             if answer is not None:
                 total[question['key']["*"]['emotion']] += answer
         self.results[note] = total
+
+class ETQuestionnaire(TextTest):
+    def __init__(self, seed: int = 0, file: TextIO = get_file_descriptor('data/ET.json')) -> None:
+        super().__init__(seed, file, lambda a: int(a))
+    
+    def _score_cycle(self, total: dict, answers: list, data: list, note: str) -> None:
+        for answer, question in zip(answers, data):
+            if answer is not None:
+                total[question['key']["*"]['emotion']] += answer
+        self.results[note] = total
