@@ -1,2 +1,5 @@
 __pycache__/
 .venv/
+output/
+.env
+emotional_prompts.json

@@ -1,5 +1,5 @@
 import random
-from typing import TextIO, Iterable, Callable
+from typing import TextIO, Iterable, Callable, Any
 from json import load
 from .utils import bar_plot, normalize_answers
 
@@ -23,18 +23,18 @@ class BaseTest():
     def sequence(self) -> Iterable:
         raise NotImplementedError
     
-    def score(self, answers: list, note: str = 'default'):
+    def score(self, answers: list, note: str = 'default', first=True, factor=1):
         data = self.sample()
-        total = {emotion: 0 for emotion in self.emotions}
-        return self._score_cycle(total,
-                                 list(normalize_answers(answers, regex=self.regex, l=self.l)),
-                                 data, note)
+        if first:
+            self.total = {emotion: 0 for emotion in self.emotions}
+        return self._score_cycle(list(normalize_answers(answers, regex=self.regex, l=self.l)),
+                                 factor, data, note)
     
     def _score_cycle(self, *args):
         raise NotImplementedError
     
-    def plot(self):
-        return bar_plot(self.results, self.emotions, self.standart)
+    def plot(self, title=''):
+        return bar_plot(title, self.results, self.emotions, self.standart)
 
 
 class TextTest(BaseTest):
@@ -45,3 +45,13 @@ class TextTest(BaseTest):
 class ImageTest(BaseTest):
     def sequence(self) -> Iterable:
         return ( (i['image'], i['question']) for i in self.sample())
+
+class BasicAgent():
+    def __init__(self, **kwargs) -> None:
+        raise NotImplementedError
+    
+    def get_prompt(self, **kwargs) -> Any:
+        raise NotImplementedError
+    
+    def pass_questionnaire(self, **kwargs) -> Iterable:
+        raise NotImplementedError

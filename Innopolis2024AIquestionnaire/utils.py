@@ -21,7 +21,7 @@ def normalize_answers(answers: list, regex: str, l: Callable) -> Generator:
         else:
             yield None
 
-def bar_plot(data, emotions, standart = []) -> plt.Figure:
+def bar_plot(title, data, emotions, standart = []) -> plt.Figure:
     colors = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c',
               '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a', '#dea17f', '#b15928']
 
@@ -29,7 +29,7 @@ def bar_plot(data, emotions, standart = []) -> plt.Figure:
 
     barWidth = 1 / (len(emotions) + 1)
 
-    fig = plt.figure(figsize=(10, 5))
+    fig = plt.figure(figsize=(2 * len(data), 5))
     ax = plt.subplot(111)
 
     br = np.arange(max(len(i) for i in plot_data.values()))
@@ -42,6 +42,7 @@ def bar_plot(data, emotions, standart = []) -> plt.Figure:
     if 'default' in data:
         plt.axhline(y=sum(data['default'].values()) / len(data['default'].values()), color='black', linestyle='-', label='Среднее по default')
 
+    plt.title(title)
     plt.xlabel('Группы')
     plt.ylabel('Оценка')
     plt.xticks([r + (len(emotions) - 1) * barWidth / 2 for r in range(len(data))], data.keys())
@@ -51,4 +52,5 @@ def bar_plot(data, emotions, standart = []) -> plt.Figure:
 
     # Put a legend to the right of the current axis
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.close()
     return fig
