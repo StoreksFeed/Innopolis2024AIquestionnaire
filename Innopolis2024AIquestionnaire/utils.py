@@ -15,7 +15,7 @@ def get_file_descriptor(filename: str) -> TextIO:
 def normalize_answers(answers: list, regex: str, l: Callable) -> Generator:
     r = re.compile(regex, flags=re.IGNORECASE)
     for answer in answers:
-        match = r.match(answer)
+        match = r.search(answer)
         if match is not None:
             yield l(match[0])
         else:
