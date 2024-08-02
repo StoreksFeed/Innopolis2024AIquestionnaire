@@ -1,8 +1,8 @@
 import requests
 import time
-from .classes import BasicAgent
+from .classes import BaseAgent
 
-class YaGPT(BasicAgent):
+class YaGPT(BaseAgent):
     def __init__(self, yandex_folder: str, yandex_api_key: str, temp: int = 0.5, model: str = 'yandexgpt-lite'):
         self.folder = yandex_folder
         self.api_key = yandex_api_key

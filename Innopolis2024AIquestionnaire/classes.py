@@ -46,7 +46,7 @@ class ImageTest(BaseTest):
     def sequence(self) -> Iterable:
         return ( (i['image'], i['question']) for i in self.sample())
 
-class BasicAgent():
+class BaseAgent():
     def __init__(self, **kwargs) -> None:
         raise NotImplementedError
     
