@@ -1,5 +1,5 @@
 __pycache__/
 .venv/
-output/
+demo_results/*_answers
 .env
 emotional_prompts.json
